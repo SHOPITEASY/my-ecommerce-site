@@ -1,0 +1,39 @@
+<div id="products"></div>
+<script scr="https://cdn.jsdeliver.net/nmp/@supabase/supabase-js"></script>
+<script scr="supabase.js"></script>
+<script>
+
+async function loadProducts(){
+
+const { data, error } = await supabase
+.from('products')
+.select('*');
+
+if(error){
+console.log(error);
+return;
+}
+
+data.forEach(product => {
+
+document.getElementById("products").innerHTML += `
+
+<div style="border:1px solid gray; padding:10px; margin:10px;">
+
+<h3>${product.name}</h3>
+
+<p>Price: KES ${product.price}</p>
+
+<img src="${product.image}" width="200">
+
+</div>
+
+`;
+
+});
+
+}
+
+loadProducts();
+
+</script>
